@@ -5,6 +5,8 @@
 // }
 var phirephiterArray;
 var currentPersonIndex = 0;
+var currentBlockIndex = 0;
+var numberOfBlocks = 18;
 
 $(document).ready(function(){
   // Upon page load, get the data from the server
@@ -20,20 +22,46 @@ $(document).ready(function(){
       // loadCarousel(phirephiterArray);
 
       displayPersonAtIndex(0);
-    } // sucess done
+
+    }
+     // sucess done
   });
+
+  addBlocksToPage();
+
+  currentPersonIndex = currentBlockIndex;
+
 
   $('#next').on('click', function(){
     $('.content').empty();
+
+    // $('#carouselBlock').addClass(focus);
     currentPersonIndex++;
+    // highlightBlock(currentBlockIndex);
+    if (currentPersonIndex < phirephiterArray.length) {
+      displayPersonAtIndex(currentPersonIndex);
+  } else {
+    currentPersonIndex = 0;
     displayPersonAtIndex(currentPersonIndex);
+  }
+
   });
 
   $('#prev').on('click', function(){
     $('.content').empty();
+    // currentPersonIndex = currentBlockIndex;
+    // $('#carouselBlock').addClass(focus);
     currentPersonIndex--;
+    // highlightBlock(currentBlockIndex);
+    if (currentPersonIndex >= 0) {
+      displayPersonAtIndex(currentPersonIndex);
+    } else {
+    currentPersonIndex = 17;
     displayPersonAtIndex(currentPersonIndex);
+  }
   });
+
+
   // loadCarousel(data.phirephiters[i]);
 });
 
@@ -43,15 +71,27 @@ function displayPersonAtIndex(i) {
   $(".content").append("<div class='person'></div>");
   $(".content").children().last();
   var $el = $(".content").children().last();
-  // $el.data("name", phirephiterArray[i].name);
-  // $el.data("username", phirephiterArray[i].username);
-  // $el.data("shoutout", phirephiterArray[i].shoutout);
   $el.append('<h2>' + phirephiterArray[i].name + '</h2>');
   $el.append('<p>' + phirephiterArray[i].git_username + '</p>');
   $el.append('<p>' + phirephiterArray[i].shoutout + '</p>');
-
 }
 
+
+function addBlocksToPage() {
+  // $('#carouselBlock').empty();
+  for (var i = 0; i < numberOfBlocks; i++) {
+    var newCarouselBlock = $('<div>');
+    newCarouselBlock.css('background-color', 'Aqua');
+    newCarouselBlock.addClass('carouselColorBlock');
+    newCarouselBlock.data('currentBlockIndex', i);
+    $('#carouselBlock').append(newCarouselBlock);
+  }
+}
+
+// function highlightBlock(currentBlockIndex) {
+//   currentPersonIndex = currentBlockIndex;
+//   $('.currentBlockIndex').addClass('.highlightDiv');
+// }
 
 // writes everything to the DOM option 1
 // function loadCarousel(phirephiterArray){
