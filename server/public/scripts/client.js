@@ -28,16 +28,18 @@ $(document).ready(function(){
   });
 
   addBlocksToPage();
+  highlightBlock(0);
 
   currentPersonIndex = currentBlockIndex;
-
+  // highlightBlock(currentBlockIndex);
 
   $('#next').on('click', function(){
     $('.content').empty();
 
     // $('#carouselBlock').addClass(focus);
     currentPersonIndex++;
-    // highlightBlock(currentBlockIndex);
+    highlightBlock(currentPersonIndex);
+    console.log(currentPersonIndex);
     if (currentPersonIndex < phirephiterArray.length) {
       displayPersonAtIndex(currentPersonIndex);
   } else {
@@ -52,7 +54,7 @@ $(document).ready(function(){
     // currentPersonIndex = currentBlockIndex;
     // $('#carouselBlock').addClass(focus);
     currentPersonIndex--;
-    // highlightBlock(currentBlockIndex);
+    highlightBlock(currentPersonIndex);
     if (currentPersonIndex >= 0) {
       displayPersonAtIndex(currentPersonIndex);
     } else {
@@ -60,7 +62,7 @@ $(document).ready(function(){
     displayPersonAtIndex(currentPersonIndex);
   }
   });
-
+  // highlightBlock(currentPersonIndex);
 
   // loadCarousel(data.phirephiters[i]);
 });
@@ -74,6 +76,7 @@ function displayPersonAtIndex(i) {
   $el.append('<h2>' + phirephiterArray[i].name + '</h2>');
   $el.append('<p>' + phirephiterArray[i].git_username + '</p>');
   $el.append('<p>' + phirephiterArray[i].shoutout + '</p>');
+  // highlightBlock();
 }
 
 
@@ -81,16 +84,48 @@ function addBlocksToPage() {
   // $('#carouselBlock').empty();
   for (var i = 0; i < numberOfBlocks; i++) {
     var newCarouselBlock = $('<div>');
+    newCarouselBlock.attr('id', i);
     newCarouselBlock.css('background-color', 'Aqua');
     newCarouselBlock.addClass('carouselColorBlock');
-    newCarouselBlock.data('currentBlockIndex', i);
+    // newCarouselBlock.attr('#' + i );
     $('#carouselBlock').append(newCarouselBlock);
   }
 }
 
-// function highlightBlock(currentBlockIndex) {
-//   currentPersonIndex = currentBlockIndex;
-//   $('.currentBlockIndex').addClass('.highlightDiv');
+function highlightBlock(person) {
+  // var i = currentPersonIndex;
+  // var $blockToHighlight = '#' + i;
+  var $blockToHighlight = $('#' + person);
+  if ($blockToHighlight == person) {
+    $blockToHighlight.addClass('active');
+  } else {
+  $blockToHighlight.removeClass('active');
+}
+}
+
+// function unhighlightBlock(person) {
+//   var $unHighBlock = $('#' + person)
+// }
+
+
+
+
+
+
+  // var blocks = $('#carouselColorBlock').length;
+
+
+
+
+
+
+
+//   var highlightedBlock = currentPersonIndex;
+//   if ( highlightedBlock === carouselColorBlock.data().currentBlockIndex ) {
+//   $('#carouselColorBlock').addClass('active');
+// } else {
+//   $('#carouselColorBlock').addClass('carouselColorBlock');
+//   }
 // }
 
 // writes everything to the DOM option 1
